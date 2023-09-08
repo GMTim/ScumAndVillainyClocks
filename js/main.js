@@ -196,6 +196,7 @@ class ElementWorker {
                         clockEle.attr(Att.filled, clock.filledSegments)
                         clockEle.find("h5").text(clock.title)
                         clockEle.find("img").attr("src", src)
+                        clockEle.find("p").text(`${clock.filledSegments}/${clock.totalSegments}`)
                     }
                 } else {
                     let src = drawSegmentedCircle({segments: clock.totalSegments, filledSegments: clock.filledSegments})
