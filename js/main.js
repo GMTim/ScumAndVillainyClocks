@@ -153,11 +153,10 @@ class ElementWorker {
      * @param {ClockGroup[]} data */
     updateGroups(data) {
         const missingEles = Helpers.findMissing(this.groups, data.map(g => g.id))
-        missingEles.forEach(e => {
-            e.remove()
-            const index = this.groups.indexOf(e)
-            this.groups.splice(index, 1)
-        })
+        for (const ele of missingEles) {
+            ele.remove()
+            this.groups.splice(this.groups.indexOf(ele), 1)
+        }
         for (const group of data) {
             let groupEle = Helpers.findById(this.groups, group.id)
             if (groupEle) {
@@ -180,10 +179,10 @@ class ElementWorker {
         /** @type {string[]} */
         const allClocksIds = [].concat(...clocksArrs)
         const missingClocks = Helpers.findMissing(this.clocks, allClocksIds)
-        missingClocks.forEach((clock) => {
+        for (const clock of missingClocks) {
             clock.remove()
-            clock.splice(this.clocks.indexOf(clock), 1)
-        })
+            this.clocks.splice(this.clocks.indexOf(clock), 1)
+        }
         for (const group of data) {
             for (const clock of group.clocks) {
                 let clockEle = Helpers.findById(this.clocks, clock.id)
