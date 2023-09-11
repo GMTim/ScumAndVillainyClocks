@@ -5,19 +5,41 @@
  * @property {number} circleRadius - The radius of the circle.
  * @property {number} segments - The total number of segments in the circle.
  * @property {number} filledSegments - The number of segments that should be filled.
+ * @property {string} color - The number of segments that should be filled.
+ * @property {SegmentColors} colors
+ */
+/**
+ * Configuration for the segmented circle drawing.
+ * @typedef {Object} SegmentColors
  * @property {string} segmentColor - The color for the filled segments.
  * @property {string} emptySegmentColor - The color for the empty segments.
  * @property {string} borderColor - The color for the border of the segments.
  */
 
+const colors = {
+    green: {
+        segmentColor: '#336633',
+        emptySegmentColor: '#333333',
+        borderColor: '#669966'
+    },
+    red: {
+        segmentColor: '#663333',
+        emptySegmentColor: '#333333',
+        borderColor: '#996666'
+    },
+    blue: {
+        segmentColor: '#333366',
+        emptySegmentColor: '#333333',
+        borderColor: '#666699'
+    }
+}
 const defaultConfig = {
     canvasSize: 600,
     circleRadius: 290,
     segments: 4, // Total number of segments
     filledSegments: 0, // Number of segments to be filled
-    segmentColor: '#336633',
-    emptySegmentColor: '#333333',
-    borderColor: '#669966'
+    color: "green",
+    colors: colors.green
 };
 
 /**
@@ -29,9 +51,8 @@ function addDefaults(config) {
     config.circleRadius = config.circleRadius || defaultConfig.circleRadius
     config.segments = config.segments || defaultConfig.segments
     config.filledSegments = config.filledSegments || defaultConfig.filledSegments
-    config.segmentColor = config.segmentColor || defaultConfig.segmentColor
-    config.emptySegmentColor = config.emptySegmentColor || defaultConfig.emptySegmentColor
-    config.borderColor = config.borderColor || defaultConfig.borderColor
+    config.color = config.color || defaultConfig.color
+    config.colors = config.colors || colors[config.color]
     return config
 }
 
@@ -59,15 +80,15 @@ function drawSegmentedCircle(config) {
 
         // Fill segment if it's one of the filled segments
         if (i < config.filledSegments) {
-            ctx.fillStyle = config.segmentColor;
+            ctx.fillStyle = config.colors.segmentColor;
         } else {
-            ctx.fillStyle = config.emptySegmentColor;
+            ctx.fillStyle = config.colors.emptySegmentColor;
         }
         ctx.fill();
 
         // Draw border
         ctx.lineWidth = 5
-        ctx.strokeStyle = config.borderColor;
+        ctx.strokeStyle = config.colors.borderColor;
         ctx.stroke();
 
         startAngle += angleIncrement;

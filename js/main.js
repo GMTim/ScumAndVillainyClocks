@@ -29,6 +29,7 @@ $(() => {
  * @property {string} title - The title or name of the data.
  * @property {number} totalSegments - The total number of segments.
  * @property {number} filledSegments - The number of filled segments.
+ * @property {string} color - The number of filled segments.
  */
 
 const Helpers = {
@@ -190,7 +191,7 @@ class ElementWorker {
                     if (clockEle.attr(Att.groupId) != clock.totalSegments ||
                     clockEle.attr(Att.segments) != clock.filledSegments ||
                     clockEle.find("h5").text() != clock.title) {
-                        let src = drawSegmentedCircle({segments: clock.totalSegments, filledSegments: clock.filledSegments})
+                        let src = drawSegmentedCircle({segments: clock.totalSegments, filledSegments: clock.filledSegments, color: clock.color})
                         clockEle.attr(Att.segments, clock.segments)
                         clockEle.attr(Att.filled, clock.filledSegments)
                         clockEle.find("h5").text(clock.title)
@@ -198,7 +199,7 @@ class ElementWorker {
                         clockEle.find("p").text(`${clock.filledSegments}/${clock.totalSegments}`)
                     }
                 } else {
-                    let src = drawSegmentedCircle({segments: clock.totalSegments, filledSegments: clock.filledSegments})
+                    let src = drawSegmentedCircle({segments: clock.totalSegments, filledSegments: clock.filledSegments, color: clock.color})
                     clockEle = ElementBuilder.clock(
                         clock.id,
                         group.id,
