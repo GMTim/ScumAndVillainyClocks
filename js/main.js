@@ -2,7 +2,7 @@ import drawSegmentedCircle from "./clock.js"
 
 $(() => {
     const worker = new ElementWorker()
-    const events = new EventSource("https://darkclockapi.glitch.me/events/e3647b84-d25f-4dee-a0cc-dcfcd3f1b5bb", {})
+    const events = new EventSource("https://darkclockapi.glitch.me/events/a38b1d10-ef23-4320-908c-db2b94728492", {})
     events.onmessage = (event) => {
         worker.update(JSON.parse(event.data))
     }
